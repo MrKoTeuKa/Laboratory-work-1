@@ -40,7 +40,7 @@ namespace Laba1
             Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
             string SortFirst = Console.ReadLine();
             Clear();
-            
+          
                 switch (SortFirst)
                 {
                     case "a":
@@ -77,23 +77,24 @@ namespace Laba1
                                 j++;
                             }
                         }
-                    Console.WriteLine("\n\nМассив с четными числами");
+                        Console.WriteLine("\n\nМассив с четными числами");
                         foreach (int number in nArray)
                         {
                             Console.Write($"{number} \t");
                         }
 
-                    break;
+                        break;
 
                     case "b":
-                    Console.WriteLine("Пока");
+                        Console.WriteLine("Пока");
                         break;
 
                     default:
                         Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
-                    return;
-                    
-                }     
+                        return;
+
+                }
+          
         }
 
         static void MatrixArray()
@@ -175,32 +176,52 @@ namespace Laba1
 
         static void Main(string[] args)
         {
+            string userCommand = Console.ReadLine();
             Console.Write("Это обычная программа для работы с разными массивами. \nНажмите Enter для продолжения: ");
             Console.ReadKey();
             Console.WriteLine();
             Console.Clear();
-            Console.WriteLine("С каким массивовом Вы хотите начать работу? \na. С обычным \nb. С матричным \nc. С зубчатым");
-            string Way = Console.ReadLine();
-            Clear();
-            switch (Way)
-            
+            while (userCommand != "Да")
             {
-                case "a":
-                    DefaultArray();
-                    return;
+                Console.WriteLine("С каким массивовом Вы хотите начать работу? \na. С обычным \nb. С матричным \nc. С зубчатым \nd. Выход");
+                string Way = Console.ReadLine();
+                Clear();
+                switch (Way)
+                {
+                    case "a":
+                        DefaultArray();
+                        Console.WriteLine("\n\nВыйти из программы? Да/Нет");
+                        userCommand = Console.ReadLine();
+                        Clear();
+                        break;
 
-                case "b":
-                    MatrixArray();
-                    return;
+                    case "b":
+                        MatrixArray();
+                        Console.WriteLine("\n\nВыйти из программы? Да/Нет");
+                        userCommand = Console.ReadLine();
+                        Clear();
+                        break;
 
-                case "c":
-                    ZubArray();
-                    return;
+                    case "c":
+                        ZubArray();
+                        Console.WriteLine("\n\nВыйти из программы? Да/Нет");
+                        userCommand = Console.ReadLine();
+                        break;
 
-                default:
-                    Console.WriteLine("Выбран неизвестный пункт, повторите попытку");
-                    return;
+                    case "d":
+                        Console.WriteLine("Выйти из программы? Да/Нет");
+                        userCommand = Console.ReadLine();
+                        break;
+
+                    default:
+                        Console.WriteLine("Выбран неизвестный пункт, повторите попытку");
+                        Console.ReadKey();
+                        Clear();
+                        break;
+                }
+            
             }
+            
         }
     }
 }
