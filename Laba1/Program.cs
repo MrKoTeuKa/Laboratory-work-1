@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Linq;
 
 namespace Laba1
@@ -21,80 +23,160 @@ namespace Laba1
 
         static void DefaultArray()
         {
-            Console.Write("Введите количество элементов массива: ");
-            int elementsCount = int.Parse(Console.ReadLine());
-            int[] myArray = new int[elementsCount];
-            
-            for (int i = 0; i < myArray.Length; i++)
-            {
-                myArray[i] = GetRandom();
-            }
-
-            Console.WriteLine("\nВведенный массив:");
-            foreach (int number in myArray)
-            {
-                Console.Write($"{number} \t");
-            }
-            Console.ReadKey();
+            Console.WriteLine("Выберите тип ввода массива: \na. Ручной  \nb. Из файла");
+            string DefaulArrayOption = Console.ReadLine();
             Clear();
-            Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
-            string SortFirst = Console.ReadLine();
-            Clear();
-          
-                switch (SortFirst)
-                {
-                    case "a":
-                        Console.WriteLine($"Максимальное значение массива: {myArray.Max()}");
-                        Console.WriteLine($"Минимальное значение массива: {myArray.Min()}");
-                        Array.Sort(myArray);
-                        Console.WriteLine("\nВывод отсортированного массива");
-                        foreach (int number in myArray)
-                        {
-                            Console.Write($"{number} \t");
-                        }
-                        Array.Sort(myArray);
-                        Array.Reverse(myArray);
-                        Console.WriteLine("\n\nВывод обратно отсортированного массива");
-                        foreach (int number in myArray)
-                        {
-                            Console.Write($"{number} \t");
-                        }
-                        int nArrayLength = 0;
-                        for (int i = 0; i < myArray.Length; i++)
-                        {
-                            if (myArray[i] % 2 == 0)
+            switch (DefaulArrayOption)
+            {
+                case "a":
+                    Console.Write("Введите количество элементов массива: ");
+                    int elementsCount = int.Parse(Console.ReadLine());
+                    int[] myArray = new int[elementsCount];
+
+                    for (int i = 0; i < myArray.Length; i++)
+                    {
+                        myArray[i] = GetRandom();
+                    }
+
+                    Console.WriteLine("\nВведенный массив:");
+                    foreach (int number in myArray)
+                    {
+                        Console.Write($"{number} \t");
+                    }
+                    Console.ReadKey();
+                    Clear();
+
+                    Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
+                    string SortFirst = Console.ReadLine();
+                    Clear();
+
+                    switch (SortFirst)
+                    {
+                        case "a":
+                            Console.WriteLine($"Максимальное значение массива: {myArray.Max()}");
+                            Console.WriteLine($"Минимальное значение массива: {myArray.Min()}");
+                            Array.Sort(myArray);
+                            Console.WriteLine("\nВывод отсортированного массива");
+                            foreach (int number in myArray)
                             {
-                                nArrayLength++;
+                                Console.Write($"{number} \t");
                             }
-                        }
-                        int[] nArray = new int[nArrayLength];
-                        for (int i = 0, j = 0; i < myArray.Length; i++)
-
-                        {
-                            if (myArray[i] % 2 == 0)
+                            Array.Sort(myArray);
+                            Array.Reverse(myArray);
+                            Console.WriteLine("\n\nВывод обратно отсортированного массива");
+                            foreach (int number in myArray)
                             {
-                                nArray[j] = myArray[i];
-                                j++;
+                                Console.Write($"{number} \t");
                             }
-                        }
-                        Console.WriteLine("\n\nМассив с четными числами");
-                        foreach (int number in nArray)
-                        {
-                            Console.Write($"{number} \t");
-                        }
+                            int nArrayLength = 0;
+                            for (int i = 0; i < myArray.Length; i++)
+                            {
+                                if (myArray[i] % 2 == 0)
+                                {
+                                    nArrayLength++;
+                                }
+                            }
+                            int[] nArray = new int[nArrayLength];
+                            for (int i = 0, j = 0; i < myArray.Length; i++)
 
-                        break;
+                            {
+                                if (myArray[i] % 2 == 0)
+                                {
+                                    nArray[j] = myArray[i];
+                                    j++;
+                                }
+                            }
+                            Console.WriteLine("\n\nМассив с четными числами");
+                            foreach (int number in nArray)
+                            {
+                                Console.Write($"{number} \t");
+                            }
 
-                    case "b":
-                        Console.WriteLine("Пока");
-                        break;
+                            break;
 
-                    default:
-                        Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
-                        return;
+                        case "b":
+                            Console.WriteLine("Пока");
+                            break;
 
-                }
-          
+                        default:
+                            Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                            return;
+
+                    }
+                    break;
+
+                case "b":
+                    int[] ArrayFL = File.ReadAllText("D://Lab1.txt", Encoding.Default).Split(' ').Select(x => int.Parse(x)).ToArray();
+                    Console.WriteLine("Введенный массив:");
+
+                    foreach (int number in ArrayFL)
+                    {
+                        Console.Write($"{number} \t");
+                    }
+                    Console.WriteLine("\n\nВыполнить сортировку? \na. Да \nb. Нет");
+                    string SortFirstFL = Console.ReadLine();
+                    Clear();
+
+                    switch (SortFirstFL)
+                    {
+                        case "a":
+                            Console.WriteLine($"Максимальное значение массива: {ArrayFL.Max()}");
+                            Console.WriteLine($"Минимальное значение массива: {ArrayFL.Min()}");
+                            Array.Sort(ArrayFL);
+                            Console.WriteLine("\nВывод отсортированного массива");
+                            foreach (int number in ArrayFL)
+                            {
+                                Console.Write($"{number} \t");
+                            }
+                            Array.Sort(ArrayFL);
+                            Array.Reverse(ArrayFL);
+                            Console.WriteLine("\n\nВывод обратно отсортированного массива");
+                            foreach (int number in ArrayFL)
+                            {
+                                Console.Write($"{number} \t");
+                            }
+                            int nArrayLength = 0;
+                            for (int i = 0; i < ArrayFL.Length; i++)
+                            {
+                                if (ArrayFL[i] % 2 == 0)
+                                {
+                                    nArrayLength++;
+                                }
+                            }
+                            int[] nArray = new int[nArrayLength];
+                            for (int i = 0, j = 0; i < ArrayFL.Length; i++)
+
+                            {
+                                if (ArrayFL[i] % 2 == 0)
+                                {
+                                    nArray[j] = ArrayFL[i];
+                                    j++;
+                                }
+                            }
+                            Console.WriteLine("\n\nМассив с четными числами");
+                            foreach (int number in nArray)
+                            {
+                                Console.Write($"{number} \t");
+                            }
+
+                            break;
+
+                        case "b":
+                            Console.WriteLine("Пока");
+                            break;
+
+                        default:
+                            Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                            return;
+
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                    break;
+
+            }
         }
 
         static void MatrixArray()
