@@ -18,6 +18,19 @@ namespace Laba1
             return value;
         }
 
+        static void ShowArray(int[][] arrf)
+        {
+            foreach (int[] ar in arrf)
+            {
+                foreach (int v in ar)
+                {
+                    Console.Write(v + " ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
         static void Clear()
         {
             Console.Clear();
@@ -40,9 +53,7 @@ namespace Laba1
                         {
                             myArray[i] = GetRandom();
                         }
-
-
-
+                                                                        
                         Console.WriteLine("\nВведенный массив:");
                         foreach (int number in myArray)
                         {
@@ -303,28 +314,157 @@ namespace Laba1
         
         static void ZubArray()
         {
-            //Console.Write("Введите количество массивов: ");
-            //int lines = int.Parse(Console.ReadLine());
-            //int[][] ZubDefArray = new int[lines][];
+            
+            Console.WriteLine("Выберите тип ввода массива: \na. Ручной  \nb. Из файла");
+            string ZubArrayOption = Console.ReadLine();
+            Clear();
+            switch (ZubArrayOption)
+            {
+                case "a":
+                    
+                    int[][] zubArray = new int[0][];
+                    Console.WriteLine("Введите количество массивов массива:");
+                    int n = int.Parse(Console.ReadLine());
+                    Clear();
+                    int z = 1;
+                    zubArray = new int[n][];
+                    for (int X = 0; X < zubArray.Length; X++)
+                    {
+                        Console.WriteLine($"Введите длину вложенного массива {n-n+z}:", z++);
+                        int m = int.Parse(Console.ReadLine());
+                        zubArray[X] = new int[m];
+                        
+                        for (int Y = 0; Y < m; Y++)
+                        {
+                            zubArray[X][Y] = GetRandom();
+                        }
+                    }
 
-            //for (int i = 0; i < ZubDefArray.Length; i++)
-            //{
-            //    for (int j = 0; j < ZubDefArray[i].Length; j++)
-            //    {
-            //        ZubDefArray[i][j] = GetRandom();
-            //    }
-            //}
+                    Clear();
+                    Console.WriteLine("\nВведенный зубчатый массив: ");
+                    ShowArray(zubArray);
 
-            //Console.WriteLine("\nВведенный массив:");
-            //for (int i = 0; i < ZubDefArray.Length; i++)
-            //{
-            //    for (int j = 0; j < ZubDefArray[i].Length; j++)
-            //    {
+                    Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
+                    string SortThird = Console.ReadLine();
+                    Clear();
+                    switch (SortThird)
+                    {
+                        case "a":
+                            int min = zubArray[0][0];
+                            for (int I = 0; I < zubArray.Length; I++)
+                                for (int J = 0; J < zubArray[I].Length; J++)
+                                    if (zubArray[I][J] < min)
+                                        min = zubArray[I][J];
 
-            //    }
-            //    Console.WriteLine();
-            //}
+                            int max = zubArray[0][0];
+                            for (int I = 0; I < zubArray.Length; I++)
+                                for (int J = 0; J < zubArray[I].Length; J++)
+                                    if (zubArray[I][J] > max)
+                                        max = zubArray[I][J];
 
+                            Console.WriteLine($"Максимальное значение зубчатого массива из файла: {max}");
+                            Console.WriteLine($"Минимальное значение зубчатого массива из файла: {min}");
+                            break;
+
+                        case "b":
+                            Console.WriteLine("Перехожу к следующему пункту...");                            
+                            break;
+
+                        default:
+                            Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                            return;
+                    }
+                    Console.WriteLine("\nВыполнить редактирование массива? \na. Да \nb. Нет");
+                    string zubArrayEdit = Console.ReadLine();
+                    Clear();
+                    switch (zubArrayEdit)
+                    {
+                        case "a":
+                            break;
+
+                        case "b":
+                            Console.WriteLine("Возвращение к меню...");
+                            break;
+
+                        default:
+                            Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                            return;
+                    }
+                    break;
+                    
+                case "b":
+                    int[][] zubArrayFL = new int[0][];
+                    string[] lines = System.IO.File.ReadAllLines("D://Lab1_3.txt");
+                    zubArrayFL = new int[lines.GetLength(0)][];
+                    int i = 0, j = 0;
+                    foreach (string line in lines)
+                    {
+                        j = 0;
+                        zubArrayFL[i] = new int[line.Split(" ").Length];
+                        foreach (string val in line.Split(" "))
+                        {
+                            zubArrayFL[i][j] = int.Parse(val);
+                            j++;
+                        }
+                        i++;
+                    }
+
+                    Console.WriteLine("Введенный зубчатый массив из файла: ");
+                    ShowArray(zubArrayFL);
+
+                    Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
+                    string SortThirdFL = Console.ReadLine();
+                    Clear();
+                    switch (SortThirdFL)
+                    {
+                        case "a":                            
+                            int minFL = zubArrayFL[0][0];
+                            for (int I = 0; I < zubArrayFL.Length; I++)
+                                for (int J = 0; J < zubArrayFL[I].Length; J++)
+                                    if (zubArrayFL[I][J] < minFL)
+                                        minFL = zubArrayFL[I][J];
+
+                            int maxFL = zubArrayFL[0][0];
+                            for (int I = 0; I < zubArrayFL.Length; I++)
+                                for (int J = 0; J < zubArrayFL[I].Length; J++)
+                                    if (zubArrayFL[I][J] > maxFL)
+                                        maxFL = zubArrayFL[I][J];
+
+                            Console.WriteLine($"Максимальное значение зубчатого массива из файла: {maxFL}");
+                            Console.WriteLine($"Минимальное значение зубчатого массива из файла: {minFL}");
+                            break;
+
+                        case "b":
+                            Console.WriteLine("Перехожу к следующему пункту...");
+                            break;
+
+                        default:
+                            Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                            return;
+                    }
+
+                    Console.WriteLine("\nВыполнить редактирование массива? \na. Да \nb. Нет");
+                    string zubArrayEditFL = Console.ReadLine();
+                    Clear();
+                    switch (zubArrayEditFL)
+                    {
+                        case "a":
+                            break;
+
+                        case "b":
+                            Console.WriteLine("Возвращение к меню...");
+                            break;
+
+                        default:
+                            Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                            return;
+                    }
+                    break;
+
+                default:
+                    Console.WriteLine("Выбран неизвестный пункт, попробуйте снова");
+                    return;
+            }
         }
 
         static void Main(string[] args)
@@ -359,6 +499,7 @@ namespace Laba1
                         ZubArray();
                         Console.WriteLine("\n\nВыйти из программы? Да/Нет");
                         userCommand = Console.ReadLine();
+                        Clear();
                         break;
 
                     case "d":
