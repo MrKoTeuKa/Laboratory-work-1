@@ -18,7 +18,16 @@ namespace Laba1
             return value;
         }
 
-        static void ShowArray(int[][] arrf)
+        static void ShowDefArray(int[] arrf)
+        {
+            foreach (int elm in arrf)
+            {
+                Console.Write(elm + " ");
+            }
+            Console.WriteLine();
+        } //Спасибо Лизе за метод
+
+        static void ShowZubArray(int[][] arrf)
         {
             foreach (int[] ar in arrf)
             {
@@ -29,7 +38,7 @@ namespace Laba1
                 Console.WriteLine();
             }
             Console.WriteLine();
-        }
+        } //Спасибо Лизе за метод
 
         static void Clear()
         {
@@ -53,33 +62,82 @@ namespace Laba1
                         {
                             myArray[i] = GetRandom();
                         }
-                                                                        
-                        Console.WriteLine("\nВведенный массив:");
-                        foreach (int number in myArray)
-                        {
-                            Console.Write($"{number} \t");
-                        }
-                        Console.ReadKey();
-                        Clear();
 
-                        Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
+                        Console.WriteLine("\nВведенный массив:");
+                        ShowDefArray(myArray);                                         
+                       
+                        Console.WriteLine("\nВыполнить сортировку? \na. Да \nb. Нет");
                         string SortFirst = Console.ReadLine();
                         Clear();
 
                         switch (SortFirst)
                         {
                             case "a":
+
+                            //int MinValue = myArray[0];
+                            //for (int i = 0; i < myArray.Length; i++)
+                            //{
+                            //    if (myArray[i] < MinValue)
+                            //        MinValue = myArray[i];
+                            //}
+                            //Console.WriteLine($"Минимальное значение равно: {MinValue}");
+
+                            //int MaxValue = myArray[0];
+                            //for (int i = 0; i < myArray.Length; i++)
+                            //{
+                            //    if (myArray[i] > MaxValue)
+                            //        MaxValue = myArray[i];
+                            //}
+                            //Console.WriteLine($"Максимально значение равно: {MaxValue}");
+
+                            //for (int i = 0; i < myArray.Length - 1; i++)
+                            //{
+                            //    for (int j = i + 1; j < myArray.Length; j++)
+                            //    {
+                            //        if (myArray[i] > myArray[j])
+                            //        {
+                            //            temp = myArray[i];
+                            //            myArray[i] = myArray[j];
+                            //            myArray[j] = temp;
+                            //        }
+                            //    }
+                            //}
+                            //Console.WriteLine("Вывод отсортированного массива");
+                            //foreach (int number in myArray)
+                            //{
+                            //    Console.Write($"{number} \t");
+                            //}
+
+                            //for (int i = 0; i < myArray.Length - 1; i++)
+                            //{
+                            //    for (int j = i + 1; j < myArray.Length; j++)
+                            //    {
+                            //        if (myArray[i] > myArray[j])
+                            //        {
+                            //            temp = myArray[i];
+                            //            myArray[i] = myArray[j];
+                            //            myArray[j] = temp;
+                            //        }
+                            //    }
+                            //}
+                            //Array.Reverse(myArray);
+                            //Console.WriteLine("Вывод отсортированного массива");
+                            //foreach (int number in myArray)
+                            //{
+                            //    Console.Write($"{number} \t");
+                            //}
+
                                 Console.WriteLine($"Максимальное значение массива: {myArray.Max()}");
                                 Console.WriteLine($"Минимальное значение массива: {myArray.Min()}");
                                 Array.Sort(myArray);
-                                Console.WriteLine("\nВывод отсортированного массива");
+                                Console.WriteLine("\nВывод отсортированного массива:");
                                 foreach (int number in myArray)
                                 {
                                     Console.Write($"{number} \t");
                                 }
                                 Array.Sort(myArray);
                                 Array.Reverse(myArray);
-                                Console.WriteLine("\n\nВывод обратно отсортированного массива");
+                                Console.WriteLine("\n\nВывод обратно отсортированного массива:");
                                 foreach (int number in myArray)
                                 {
                                     Console.Write($"{number} \t");
@@ -102,7 +160,7 @@ namespace Laba1
                                         j++;
                                     }
                                 }
-                                Console.WriteLine("\n\nМассив с четными числами");
+                                Console.WriteLine("\n\nМассив с четными числами:");
                                 foreach (int number in nArray)
                                 {
                                     Console.Write($"{number} \t");
@@ -291,7 +349,7 @@ namespace Laba1
                         }
                     }
 
-                    Console.WriteLine("Перемноженная матрица");
+                    Console.WriteLine("Перемноженная матрица:");
                     for (int i = 0; i < r.GetLength(0); i++)
                     {
                         for (int j = 0; j < r.GetLength(1); j++)
@@ -323,14 +381,14 @@ namespace Laba1
                 case "a":
                     
                     int[][] zubArray = new int[0][];
-                    Console.WriteLine("Введите количество массивов массива:");
+                    Console.Write("Введите количество массивов массива: ");
                     int n = int.Parse(Console.ReadLine());
                     Clear();
                     int z = 1;
                     zubArray = new int[n][];
                     for (int X = 0; X < zubArray.Length; X++)
                     {
-                        Console.WriteLine($"Введите длину вложенного массива {n-n+z}:", z++);
+                        Console.Write($"Введите длину вложенного массива {n-n+z}: ", z++);
                         int m = int.Parse(Console.ReadLine());
                         zubArray[X] = new int[m];
                         
@@ -342,7 +400,7 @@ namespace Laba1
 
                     Clear();
                     Console.WriteLine("\nВведенный зубчатый массив: ");
-                    ShowArray(zubArray);
+                    ShowZubArray(zubArray);
 
                     Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
                     string SortThird = Console.ReadLine();
@@ -362,8 +420,8 @@ namespace Laba1
                                     if (zubArray[I][J] > max)
                                         max = zubArray[I][J];
 
-                            Console.WriteLine($"Максимальное значение зубчатого массива из файла: {max}");
-                            Console.WriteLine($"Минимальное значение зубчатого массива из файла: {min}");
+                            Console.WriteLine($"Максимальное значение зубчатого массива: {max}");
+                            Console.WriteLine($"Минимальное значение зубчатого массива: {min}");
                             break;
 
                         case "b":
@@ -380,6 +438,24 @@ namespace Laba1
                     switch (zubArrayEdit)
                     {
                         case "a":
+                            Console.WriteLine("Введенный зубчатый массив:");
+                            ShowZubArray(zubArray);
+                            Console.Write("Введите номер массива, который хотите отредактировать: ");
+                            int zubArrayIndex = int.Parse(Console.ReadLine());
+                            Console.WriteLine("\nИсходный вложенный массив:");
+                            ShowDefArray(zubArray[zubArrayIndex]);
+                            Console.Write("\nСколько элементов Вы хотите изменить? \nВведите количество: ");
+                            int amount = int.Parse(Console.ReadLine());
+                            for (int ii = 0; ii < amount; ii++)
+                            {
+                                Console.Write("\nВведите индекс изменяемого элемента: ");
+                                int aii = int.Parse(Console.ReadLine());
+                                Console.Write("Введите новое значение элемента: ");
+                                int val = int.Parse(Console.ReadLine());
+                                zubArray[zubArrayIndex][aii] = val;
+                            }
+                            Console.WriteLine("\nНовый ступенчатый массив:");
+                            ShowZubArray(zubArray);
                             break;
 
                         case "b":
@@ -410,7 +486,7 @@ namespace Laba1
                     }
 
                     Console.WriteLine("Введенный зубчатый массив из файла: ");
-                    ShowArray(zubArrayFL);
+                    ShowZubArray(zubArrayFL);
 
                     Console.WriteLine("Выполнить сортировку? \na. Да \nb. Нет");
                     string SortThirdFL = Console.ReadLine();
@@ -449,6 +525,24 @@ namespace Laba1
                     switch (zubArrayEditFL)
                     {
                         case "a":
+                            Console.WriteLine("Введенный зубчатый массив:");
+                            ShowZubArray(zubArrayFL);
+                            Console.Write("Введите номер массива, который хотите отредактировать: ");
+                            int zubArrayIndexFL = int.Parse(Console.ReadLine());
+                            Console.WriteLine("\nИсходный вложенный массив:");
+                            ShowDefArray(zubArrayFL[zubArrayIndexFL]);
+                            Console.Write("\nСколько элементов Вы хотите изменить? \nВведите количество: ");
+                            int amountFL = int.Parse(Console.ReadLine());
+                            for (int iiFL = 0; iiFL < amountFL; iiFL++)
+                            {
+                                Console.Write("\nВведите индекс изменяемого элемента: ");
+                                int aiiFL = int.Parse(Console.ReadLine());
+                                Console.Write("Введите новое значение элемента: ");
+                                int valFL = int.Parse(Console.ReadLine());
+                                zubArrayFL[zubArrayIndexFL][aiiFL] = valFL;
+                            }
+                            Console.WriteLine("\nНовый ступенчатый массив:");
+                            ShowZubArray(zubArrayFL);
                             break;
 
                         case "b":
